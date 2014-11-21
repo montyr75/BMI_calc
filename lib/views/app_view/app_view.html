@@ -1,0 +1,100 @@
+<!-- Polymer Element HTML import links go here (above <polymer-element> tag) -->
+<link rel="import" href="../../../../packages/polymer/polymer.html">
+<link rel="import" href="../../../../packages/core_elements/core_header_panel.html">
+<link rel="import" href="../../../../packages/core_elements/core_toolbar.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_input.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_radio_button.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_radio_group.html">
+<link rel="import" href="../../../../packages/paper_elements/paper_button.html">
+
+<polymer-element name="app-view">
+  <template>
+    <style>
+      :host {
+        height: 100%;
+      }
+
+      #wrapper {
+        padding: 20px;
+      }
+
+      .app-title {
+        text-align: center;
+      }
+
+      .box-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+      }
+
+      .user-select-none {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      img {
+        -moz-user-drag: -moz-none;
+        -webkit-user-drag: none;
+        user-drag: none;
+      }
+
+      paper-input {
+        width: 75px;
+        margin: 0 10px;
+        padding: 0;
+      }
+
+      h4 {
+        margin: 0;
+      }
+
+      paper-button {
+        margin-top: 15px;
+      }
+    </style>
+
+    <core-header-panel flex>
+      <core-toolbar>
+        <h2 flex class="app-title">BMI Calculator</h2>
+      </core-toolbar>
+
+      <div id="wrapper" fit layout vertical center>
+        <div class="box-container" layout vertical>
+          <paper-radio-group selected="{{units}}" layout horizontal center-center>
+            <paper-radio-button label="Imperial" name="imperial"></paper-radio-button>
+            <paper-radio-button label="Metric" name="metric"></paper-radio-button>
+          </paper-radio-group>
+
+          <div layout horizontal center end>
+            <h4>Height:</h4>
+            <template if="{{units == 'imperial'}}">
+              <paper-input type="number" label="Feet" autofocus inputValue="{{height_ft}}"></paper-input>
+              <paper-input type="number" label="Inches" inputValue="{{height_in}}"></paper-input>
+            </template>
+            <template if="{{units == 'metric'}}">
+              <paper-input label="Meters" autofocus inputValue="{{height_m}}"></paper-input>
+            </template>
+          </div>
+
+          <div layout horizontal center end>
+            <h4>Weight:</h4>
+            <template if="{{units == 'imperial'}}">
+              <paper-input type="number" label="Pounds" autofocus inputValue="{{weight_lb}}"></paper-input>
+            </template>
+            <template if="{{units == 'metric'}}">
+              <paper-input type="number" label="Kilograms" autofocus inputValue="{{weight_kg}}"></paper-input>
+            </template>
+          </div>
+
+          <paper-button label="Calculate BMI" raised on-tap="{{calculateBMI}}"></paper-button>
+        </div>
+      </div>
+    </core-header-panel>
+  </template>
+
+  <script type="application/dart" src="app_view.dart"></script>
+</polymer-element>
